@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Product Showcase</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>Smart Product Showcase</h1>
+</header>
+
+<main>
+
+  <!-- Microdata SEO -->
+  <section itemscope itemtype="https://schema.org/Product">
+
+    <h2 itemprop="name">Smart Fitness Watch X10</h2>
+
+    <!-- Figure -->
+    <figure>
+      <img src="fitnessWatch.png" alt="Smart Fitness Watch X10" itemprop="image">
+      <figcaption>Track your health with AI-powered sensors</figcaption>
+    </figure>
+
+    <!-- Video Demo -->
+    <h3>Product Demo</h3>
+    <video width="500" controls poster="preview.jpg">
+      <source src="fitness.mp4" type="video/mp4">
+      <track src="demo.vtt" kind="subtitles" label="English">
+    </video>
+
+    <!-- Audio Review -->
+    <h3>Hear Customer Review 🎧</h3>
+    <audio controls>
+      <source src="fitness.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Data Attributes -->
+    <div class="buy-section" data-price="2999" data-product="Watch X10">
+      <button id="buyBtn">Buy Now</button>
+    </div>
+
+    <!-- Rating using Canvas -->
+    <h3>Rating Visualization</h3>
+    <canvas id="ratingCanvas" width="300" height="200"></canvas>
+
+  </section>
+
+  <!-- Table -->
+  <h3>Price Comparison</h3>
+  <table>
+    <tr>
+      <th>Store</th>
+      <th>Price</th>
+      <th>Offer</th>
+    </tr>
+    <tr>
+      <td>Amazon</td>
+      <td>₹2999</td>
+      <td>10% off</td>
+    </tr>
+    <tr>
+      <td>Flipkart</td>
+      <td>₹3099</td>
+      <td>Free Delivery</td>
+    </tr>
+  </table>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Notes Keeper</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <h1>Notes Keeper</h1>
+</header>
+
+<main>
+
+  <!-- Add Note Form -->
+  <section class="add-note-section">
+    <h2>Add a Note</h2>
+
+    <form id="noteForm">
+      <textarea id="noteInput" placeholder="Write your note..." required></textarea>
+      <button type="submit">Add Note</button>
+    </form>
+  </section>
+
+  <!-- Notes List -->
+  <section class="notes-section">
+    <h2>Your Notes</h2>
+    <div id="notesContainer"></div>
+  </section>
+
+</main>
+
+<!-- Hidden Template -->
+<template id="noteTemplate">
+  <div class="note" data-id="">
+    <p class="text"></p>
+    <button class="deleteBtn" aria-label="Delete note">🗑 Delete</button>
+  </div>
+</template>
+
+<script src="script.js"></script>
+</body>
+</html>

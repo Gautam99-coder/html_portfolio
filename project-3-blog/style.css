@@ -1,0 +1,76 @@
+/* Design tokens */
+:root {
+  --primary: #0078ff;
+  --text: #222;
+  --muted: #555;
+  --radius: 12px;
+  --shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Base typography */
+body {
+  font-family: Poppins, sans-serif;
+  line-height: 1.6;
+  color: var(--text);
+  margin: 0;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  padding: 40px 20px;
+  background: white;
+  box-shadow: var(--shadow);
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+/* Container */
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* Blog grid */
+.grid {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* Blog card */
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.card h2 {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+}
+
+.card p {
+  margin-bottom: 15px;
+  color: var(--muted);
+}
+
+/* Read more link */
+.read-more {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 20px;
+  background: #f1f1f1;
+  margin-top: 40px;
+}

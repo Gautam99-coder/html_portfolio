@@ -1,44 +1,66 @@
-body {
+/* Global reset */
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
   font-family: Poppins, sans-serif;
   background: #f3f4f6;
+  min-height: 100vh;
 }
 
+/* Section */
 .features {
   text-align: center;
-  padding: 60px 20px;
+  padding: 60px 20px 120px;
 }
 
+.features h1 {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #555;
+  margin-bottom: 40px;
+}
+
+/* Grid layout */
 .grid {
   display: grid;
   gap: 25px;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  margin-top: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
+/* Card */
 .card {
   background: white;
-  padding: 30px;
-  font-size: 1.2rem;
-  border-radius: 15px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  padding: 30px 20px;
+  font-size: 1.1rem;
+  border-radius: 18px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
 /* Hover animation */
 .card:hover {
   transform: translateY(-12px) scale(1.03);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
 }
 
-/* Scroll reveal */
+/* Scroll reveal base state (hidden) */
 .reveal {
   opacity: 0;
   transform: translateY(40px);
-  transition: all 0.9s ease;
 }
 
+/* Visible state (animated into place) */
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }

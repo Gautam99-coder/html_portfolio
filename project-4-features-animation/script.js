@@ -1,10 +1,21 @@
-const reveals = document.querySelectorAll(".reveal");
+// Select all elements we want to reveal
+const revealElements = document.querySelectorAll(".reveal");
 
-window.addEventListener("scroll", () => {
-  reveals.forEach(el => {
-    const top = el.getBoundingClientRect().top;
-    if (top < window.innerHeight - 50) {
-      el.classList.add("visible");
-    }
-  });
-});
+// Create an observer
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        // Optional: stop observing once visible
+        observer.unobserve(entry.target);
+      }
+    });
+  },
+  {
+    threshold: 0.2 // 20% of element visible → trigger
+  }
+);
+
+// Attach observer to each element
+revealElements.forEach(el => observer.observe(el));

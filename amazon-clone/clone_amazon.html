@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ShopClone — Tailwind + JS Amazon-style UI</title>
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Material Icons (used as "google icon" and other icons) -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    /* small visual tweaks */
+    .product-card { transition: transform .15s ease, box-shadow .15s ease; }
+    .product-card:hover { transform: translateY(-6px); box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+    .carousel-img { height: 320px; object-fit: cover; width: 100%; }
+    .thumbs { scroll-snap-type: x mandatory; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <!-- Top navbar -->
+  <header class="bg-white shadow-sm sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center gap-4">
+          <!-- Hamburger for mobile -->
+          <button id="mobileMenuBtn" class="p-2 rounded hover:bg-gray-100 md:hidden">
+            <span class="material-icons">menu</span>
+          </button>
+          <!-- Logo (avoid trademark) -->
+          <a href="#" class="flex items-center gap-2">
+            <div class="bg-yellow-400 rounded-sm px-2 py-1 font-bold">Shop</div>
+            <div class="text-sm text-gray-600">Clone</div>
+          </a>
+          <!-- Departments (desktop) -->
+          <nav class="hidden md:flex items-center gap-3 ml-6 text-sm">
+            <a href="#" class="hover:underline">All</a>
+            <a href="#" class="hover:underline">Prime</a>
+            <a href="#" class="hover:underline">Deals</a>
+            <a href="#" class="hover:underline">Electronics</a>
+            <a href="#" class="hover:underline">Home</a>
+          </nav>
+        </div>
+
+        <!-- Search bar -->
+        <div class="flex-1 px-4">
+          <div class="relative hidden sm:flex">
+            <select class="bg-gray-100 border-r border-gray-200 px-2 rounded-l text-sm">
+              <option>All</option>
+              <option>Electronics</option>
+              <option>Home</option>
+              <option>Fashion</option>
+            </select>
+            <input id="search" type="search" placeholder="Search products, brands and more" class="flex-1 px-4 py-2 border border-gray-200 focus:outline-none" />
+            <button id="searchBtn" class="bg-yellow-400 px-4 rounded-r hover:bg-yellow-500">
+              <span class="material-icons">search</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right actions -->
+        <div class="flex items-center gap-4">
+          <button id="signinBtn" class="flex items-center gap-2 border border-gray-200 px-3 py-1 rounded text-sm hover:bg-gray-50">
+            <span class="material-icons">account_circle</span>
+            <span>Sign in</span>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png" alt="google" class="w-6 h-6 object-contain" />
+          </button>
+          <a href="#" class="hidden md:flex items-center gap-2 px-3 py-1 rounded hover:bg-gray-50 border border-gray-200">
+            <span class="material-icons">shopping_cart</span>Cart
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile menu (hidden by default) -->
+    <div id="mobileMenu" class="md:hidden hidden bg-white border-t">
+      <div class="px-4 py-3">
+        <a href="#" class="block py-2">All</a>
+        <a href="#" class="block py-2">Deals</a>
+        <a href="#" class="block py-2">Your Orders</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <!-- Hero carousel -->
+    <section class="mb-6">
+      <div class="relative overflow-hidden rounded-lg shadow-sm bg-white">
+        <div id="carousel" class="relative">
+          <button id="carouselPrev" class="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-white/80 rounded-full shadow hover:bg-white z-20">
+            <span class="material-icons">chevron_left</span>
+          </button>
+          <button id="carouselNext" class="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-white/80 rounded-full shadow hover:bg-white z-20">
+            <span class="material-icons">chevron_right</span>
+          </button>
+
+          <div class="flex transition-transform duration-500" id="carouselInner" style="width:300%;">
+            <div class="w-full flex-shrink-0">
+              <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1600&auto=format&fit=crop&crop=entropy" class="carousel-img" alt="hero1">
+            </div>
+            <div class="w-full flex-shrink-0">
+              <img src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?q=80&w=1600&auto=format&fit=crop&crop=entropy" class="carousel-img" alt="hero2">
+            </div>
+            <div class="w-full flex-shrink-0">
+              <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1600&auto=format&fit=crop&crop=entropy" class="carousel-img" alt="hero3">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tile categories grid -->
+    <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+      <div class="bg-white p-4 rounded shadow-sm">
+        <h3 class="font-semibold">Revamp your home in style</h3>
+        <p class="text-sm text-gray-500">Decor, lights & more</p>
+      </div>
+      <div class="bg-white p-4 rounded shadow-sm">
+        <h3 class="font-semibold">Bulk order discounts</h3>
+        <p class="text-sm text-gray-500">Up to 18% off</p>
+      </div>
+      <div class="bg-white p-4 rounded shadow-sm">
+        <h3 class="font-semibold">Appliances for your home</h3>
+        <p class="text-sm text-gray-500">Up to 55% off</p>
+      </div>
+      <div class="bg-white p-4 rounded shadow-sm">
+        <h3 class="font-semibold">Auto essentials</h3>
+        <p class="text-sm text-gray-500">Up to 60% off</p>
+      </div>
+    </section>
+
+    <!-- Product carousel rows (repeatable) -->
+    <section class="mb-6">
+      <h2 class="text-lg font-semibold mb-3">Best Sellers in Clothing & Accessories</h2>
+      <div class="overflow-x-auto whitespace-no-wrap flex gap-4 pb-3">
+        <!-- product cards -->
+        <template id="productTemplate">
+          <div class="product-card bg-white p-3 rounded w-56 inline-block">
+            <img class="w-full h-36 object-cover rounded" src="" alt="product">
+            <h4 class="mt-2 font-medium text-sm">Product name</h4>
+            <p class="text-sm text-gray-600">Brand</p>
+            <div class="mt-2 flex items-center justify-between">
+              <div class="font-semibold">₹999</div>
+              <button class="viewBtn text-sm text-blue-600">View</button>
+            </div>
+          </div>
+        </template>
+        <!-- Example product instances with free source images -->
+        <div class="product-card bg-white p-3 rounded w-56">
+          <img class="w-full h-36 object-cover rounded" src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=800&auto=format&fit=crop&crop=entropy" alt="p1">
+          <h4 class="mt-2 font-medium text-sm">Men's Jacket</h4>
+          <p class="text-sm text-gray-600">WinterWear</p>
+          <div class="mt-2 flex items-center justify-between">
+            <div class="font-semibold">₹3,499</div>
+            <button class="viewBtn text-sm text-blue-600">View</button>
+          </div>
+        </div>
+
+        <div class="product-card bg-white p-3 rounded w-56">
+          <img class="w-full h-36 object-cover rounded" src="https://images.unsplash.com/photo-1520975915058-2f6b8c8d5bb7?q=80&w=800&auto=format&fit=crop&crop=entropy" alt="p2">
+          <h4 class="mt-2 font-medium text-sm">Running Shoes</h4>
+          <p class="text-sm text-gray-600">Sportify</p>
+          <div class="mt-2 flex items-center justify-between">
+            <div class="font-semibold">₹2,199</div>
+            <button class="viewBtn text-sm text-blue-600">View</button>
+          </div>
+        </div>
+
+        <div class="product-card bg-white p-3 rounded w-56">
+          <img class="w-full h-36 object-cover rounded" src="https://images.unsplash.com/photo-1543168256-418811576b4f?q=80&w=800&auto=format&fit=crop&crop=entropy" alt="p3">
+          <h4 class="mt-2 font-medium text-sm">Casual Shirt</h4>
+          <p class="text-sm text-gray-600">Loft</p>
+          <div class="mt-2 flex items-center justify-between">
+            <div class="font-semibold">₹899</div>
+            <button class="viewBtn text-sm text-blue-600">View</button>
+          </div>
+        </div>
+
+        <div class="product-card bg-white p-3 rounded w-56">
+          <img class="w-full h-36 object-cover rounded" src="https://images.unsplash.com/photo-1485902561677-5a7d5a0c25f5?q=80&w=800&auto=format&fit=crop&crop=entropy" alt="p4">
+          <h4 class="mt-2 font-medium text-sm">Beanie Hat</h4>
+          <p class="text-sm text-gray-600">Cozy</p>
+          <div class="mt-2 flex items-center justify-between">
+            <div class="font-semibold">₹349</div>
+            <button class="viewBtn text-sm text-blue-600">View</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mixed grid of categories & products -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="bg-white p-4 rounded shadow-sm">
+        <h3 class="font-semibold mb-2">Deals on Home essentials</h3>
+        <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=800&auto=format&fit=crop&crop=entropy" class="w-full h-40 object-cover rounded" alt="home">
+      </div>
+      <div class="bg-white p-4 rounded shadow-sm">
+        <h3 class="font-semibold mb-2">Electronics picks</h3>
+        <img src="https://images.unsplash.com/photo-1510557880182-3f8b6760ae02?q=80&w=800&auto=format&fit=crop&crop=entropy" class="w-full h-40 object-cover rounded" alt="elec">
+      </div>
+      <div class="bg-white p-4 rounded shadow-sm">
+        <h3 class="font-semibold mb-2">Trending gadgets</h3>
+        <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=800&auto=format&fit=crop&crop=entropy" class="w-full h-40 object-cover rounded" alt="trending">
+      </div>
+    </section>
+
+    <!-- Footer promo strip -->
+    <section class="mt-8 bg-white p-4 rounded shadow-sm">
+      <div class="flex items-center justify-between">
+        <div>
+          <h4 class="font-semibold">See personalized recommendations</h4>
+          <p class="text-sm text-gray-500">Sign in for the best experience</p>
+        </div>
+        <button class="bg-yellow-400 px-4 py-2 rounded">Sign in</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Product Modal -->
+  <div id="productModal" class="fixed inset-0 bg-black/40 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-lg max-w-3xl w-full p-6">
+      <div class="flex justify-between items-start">
+        <h3 id="modalTitle" class="text-lg font-semibold">Product</h3>
+        <button id="closeModal" class="text-gray-500 hover:text-gray-800">Close</button>
+      </div>
+      <div class="mt-4 flex gap-6">
+        <img id="modalImg" src="" alt="modal" class="w-56 h-56 object-cover rounded" />
+        <div>
+          <p id="modalDesc" class="text-gray-600">Description</p>
+          <div class="mt-4 font-bold text-xl" id="modalPrice">₹0</div>
+          <div class="mt-6">
+            <button class="bg-yellow-400 px-4 py-2 rounded">Add to cart</button>
+            <button id="buyNow" class="ml-2 px-4 py-2 border rounded">Buy now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-200 mt-8">
+    <div class="max-w-7xl mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div>
+        <h4 class="font-semibold mb-2">Get to Know Us</h4>
+        <ul class="text-sm text-gray-400">
+          <li>About</li>
+          <li>Careers</li>
+          <li>Press</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-2">Make Money with Us</h4>
+        <ul class="text-sm text-gray-400">
+          <li>Sell on ShopClone</li>
+          <li>Advertise</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-2">Let Us Help You</h4>
+        <ul class="text-sm text-gray-400">
+          <li>Help Center</li>
+          <li>Returns</li>
+        </ul>
+      </div>
+    </div>
+    <div class="text-center text-sm bg-gray-800 py-3">© ShopClone — Demo UI</div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    document.getElementById('mobileMenuBtn').addEventListener('click', ()=>{
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    });
+
+    // Carousel logic
+    const inner = document.getElementById('carouselInner');
+    const total = inner.children.length;
+    let idx = 0;
+    function showIndex(i) {
+      idx = (i + total) % total;
+      inner.style.transform = 'translateX(' + (-idx*100) + '%)';
+    }
+    document.getElementById('carouselNext').addEventListener('click', ()=> showIndex(idx+1));
+    document.getElementById('carouselPrev').addEventListener('click', ()=> showIndex(idx-1));
+    let carouselTimer = setInterval(()=> showIndex(idx+1), 5000);
+    // pause on hover
+    document.getElementById('carousel').addEventListener('mouseenter', ()=> clearInterval(carouselTimer));
+    document.getElementById('carousel').addEventListener('mouseleave', ()=> carouselTimer = setInterval(()=> showIndex(idx+1), 5000));
+
+    // Product modal
+    document.querySelectorAll('.viewBtn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const card = e.target.closest('.product-card');
+        const img = card.querySelector('img').src;
+        const title = card.querySelector('h4').innerText;
+        const price = card.querySelector('.font-semibold').innerText;
+        document.getElementById('modalImg').src = img;
+        document.getElementById('modalTitle').innerText = title;
+        document.getElementById('modalDesc').innerText = 'High quality product from our catalog. This is a demo product card.';
+        document.getElementById('modalPrice').innerText = price;
+        document.getElementById('productModal').classList.remove('hidden');
+        document.getElementById('productModal').classList.add('flex');
+      });
+    });
+    document.getElementById('closeModal').addEventListener('click', ()=>{
+      document.getElementById('productModal').classList.add('hidden');
+      document.getElementById('productModal').classList.remove('flex');
+    });
+
+    // Basic search behaviour
+    document.getElementById('searchBtn').addEventListener('click', ()=>{
+      const q = document.getElementById('search').value.trim();
+      if(!q) return alert('Please enter search text.');
+      alert('Searching for: ' + q + ' (demo)');
+    });
+
+    // Signin button demo (shows google icon use)
+    document.getElementById('signinBtn').addEventListener('click', ()=>{
+      alert('Sign in with Google (demo)');
+    });
+  </script>
+</body>
+</html>

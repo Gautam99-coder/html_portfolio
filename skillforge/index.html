@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SkillForge</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>SkillForge</h1>
+    <p>Build skills with focus</p>
+  </header>
+
+  <main>
+    <!-- Add Skill -->
+    <section id="add-skill">
+      <input type="text" id="skillName" placeholder="Skill name">
+      <input type="number" id="dailyTarget" placeholder="Daily minutes">
+      <button id="addSkillBtn">Add Skill</button>
+    </section>
+
+    <!-- Skill List -->
+    <section id="skills"></section>
+
+    <!-- Focus Timer -->
+    <section id="timer">
+      <h2>Focus Session</h2>
+      <select id="skillSelect"></select>
+      <div id="time">00:00</div>
+      <button id="start">Start</button>
+      <button id="pause">Pause</button>
+      <button id="reset">Reset</button>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

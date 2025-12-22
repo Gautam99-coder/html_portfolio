@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>UI Master</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<header class="navbar">
+  <div class="logo">UI<span>Master</span></div>
+  <nav id="navMenu">
+    <a href="#home">Home</a>
+    <a href="#features">Features</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="menu" onclick="toggleMenu()">☰</div>
+</header>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <h1>Learn Modern UI Design</h1>
+  <p>Advanced HTML, CSS & JavaScript in one project</p>
+  <button onclick="openModal()">Get Started</button>
+</section>
+
+<!-- Features -->
+<section class="features" id="features">
+  <div class="card">🔥 Clean UI</div>
+  <div class="card">🎨 Animations</div>
+  <div class="card">📱 Responsive</div>
+</section>
+
+<!-- Gallery -->
+<section class="gallery" id="gallery">
+  <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f">
+  <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c">
+  <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d">
+</section>
+
+<!-- Modal -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <h2>Welcome Gautam 🚀</h2>
+    <p>This project will make your UI skills strong.</p>
+    <button onclick="closeModal()">Close</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

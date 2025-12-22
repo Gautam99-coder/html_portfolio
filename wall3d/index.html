@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Wall3D – Free Wallpapers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- VIDEO HERO -->
+<section class="hero">
+  <video autoplay muted loop>
+    <source src="https://cdn.coverr.co/videos/coverr-working-on-a-laptop-2740/1080p.mp4" type="video/mp4">
+  </video>
+  <div class="hero-content">
+    <h1>Wall<span>3D</span></h1>
+    <p>Premium • Free • 3D Wallpapers</p>
+  </div>
+</section>
+
+<!-- FILTER -->
+<section class="filter">
+  <button onclick="loadWallpapers('phone')">📱 Phone</button>
+  <button onclick="loadWallpapers('laptop')">💻 Laptop</button>
+</section>
+
+<!-- WALLPAPERS -->
+<section class="grid" id="grid"></section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© Wall3D | Free Unsplash Wallpapers</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -29,5 +29,5 @@ function loadWallpapers(type) {
   }
 }
 
-// LOAD DEFAULT
+
 loadWallpapers("phone");

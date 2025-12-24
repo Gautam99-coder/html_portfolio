@@ -5,7 +5,7 @@ function loadWallpapers(type) {
 
   for (let i = 0; i < 9; i++) {
 
-    // RANDOM IMAGE ID (IMPORTANT)
+
     const randomId = Math.floor(Math.random() * 1000);
 
     // SIZE BASED ON DEVICE
